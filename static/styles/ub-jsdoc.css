@@ -77,7 +77,7 @@ nav input[type=checkbox]:checked + label:before {
 }
 
 #search-result  h2 {
-  color: white; 
+  color: white;
 }
 
 #search-result input[type=checkbox] { display: none; }
@@ -176,7 +176,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   margin-top: 1em;
   padding-top: 1em;
-  color: #333; 
+  color: #333;
 }
 
 h2 {
@@ -217,8 +217,8 @@ h6 {
   height: 90vh
 }
 
-li.selected { 
-  font-weight: bold; border:1px solid yellow 
+li.selected {
+  font-weight: bold; border:1px solid yellow
 }
 
 #main body{
@@ -437,9 +437,10 @@ h4.name {
 }
 
 dl.param-type {
-  border-bottom: 1px solid hsl(0, 0%, 87%);
-  margin-bottom: 30px;
-  padding-bottom: 30px;
+  /*border-bottom: 1px solid hsl(0, 0%, 87%);*/
+  /*margin-bottom: 30px;*/
+  /*padding-bottom: 30px;*/
+  margin-bottom: 1em;
 }
 
 .param-type dt, .param-type dd {
@@ -572,6 +573,70 @@ dl.param-type {
   height: 100%;
   background: hsla(0, 0%, 0%, 0.5);
   z-index: 1;
+}
+
+
+
+
+/***************************
+added in fork
+***************************/
+
+.item-wrapper {
+  margin-top: 6em;
+}
+
+.prettyprint {
+  padding: 1em;
+}
+
+.details ul {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+code {
+  background-color: #f0f0f0;
+  border: 1px solid #e0e0e0;
+  font-size: 0.85em;
+  padding: 0.15em;
+}
+
+.prettyprint code {
+  background: none;
+  border: none;
+  font-size: inherit;
+  padding: inherit;
+}
+
+body {
+  max-width: none;
+}
+
+nav {
+  background: #f8f8f8;
+  border-right: 1px solid #e0e0e0;
+  padding: 0 0.8em;
+  white-space: pre;
+  width: 380px;
+}
+
+#main {
+  float: none;
+  overflow: hidden;
+  padding: 0 1em;
+  width: auto;
+  margin-left: 380px;
+}
+
+#search-result {
+    background-color: #444;
+    margin-top: 4em;
+    max-height: 50%;
+}
+
+.search-char-match {
+  color: #f6f;
 }
 
 @media only screen and (min-width: 320px) and (max-width: 1200px) {

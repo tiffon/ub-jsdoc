@@ -34,7 +34,7 @@ if (data.defaultvalue && (data.defaultvaluetype === 'object' || data.defaultvalu
 
     <?js if (data.inherited && data.inherits && !data.overrides) { ?>
     <dd><ul class="dummy"><li>
-        <?js= this.linkto(data.inherits, this.htmlsafe(data.inherits), 'inherited-from') ?>
+        <?js= this.linkto(data.inherits, 'inherited', 'inherited-from') ?>
     </li></ul></dd>
     <?js } ?>
 
@@ -106,10 +106,9 @@ if (data.defaultvalue && (data.defaultvaluetype === 'object' || data.defaultvalu
         </ul></dd>
     <?js } ?>
 
-    <?js if (data.meta && self.outputSourceFiles && (self.conf.smallSourceLink === false) ) {?>
-    <dt class="tag-source">Source:</dt>
+    <?js if (data.meta && self.outputSourceFiles) {?>
     <dd class="tag-source"><ul class="dummy"><li>
-        <?js= self.linkto(meta.shortpath) ?>, <?js= self.linkto(meta.shortpath, 'line ' + meta.lineno, null, 'line' + meta.lineno) ?>
+        <?js= self.linkto(meta.shortpath, 'Source', null, 'line' + meta.lineno) ?>
     </li></ul></dd>
     <?js } ?>
 

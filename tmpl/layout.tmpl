@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title><?js= title ?> - Documentation</title>
-    
+
     <script src="scripts/prettify/prettify.js"></script>
     <!--script src="scripts/prettify/lang-css.js"></script-->
     <!--[if lt IE 9]>
@@ -34,6 +34,14 @@
 
 <label for="nav-trigger" class="overlay"></label>
 
+
+<div id="search-result">
+    <input type="checkbox" id="search-trigger" class="search-trigger" />
+    <label for="search-trigger" style="float: right"></label>
+    <!--label for="search-trigger" class="overlay"></label-->
+    <section id="search-result-inner"></section>
+</div>
+
 <nav>
     <input type="text" id="search-input" placeholder="Search" autocomplete="off">
     <?js= this.nav ?>
@@ -45,13 +53,6 @@
     <?js } ?>
 
     <?js= content ?>
-</div>
-
-<div id="search-result">
-    <input type="checkbox" id="search-trigger" class="search-trigger" />
-    <label for="search-trigger" style="float: right"></label>
-    <!--label for="search-trigger" class="overlay"></label-->
-    <section id="search-result-inner"></section>
 </div>
 <br class="clear">
 

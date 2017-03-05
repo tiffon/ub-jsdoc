@@ -2,19 +2,26 @@
 var data = obj;
 var self = this;
 ?>
+
+
+<div class="item-wrapper method-wrapper">
+
+
 <?js if (data.kind !== 'module') { ?>
     <?js if (data.kind === 'class' && data.classdesc) { ?>
     <h2>Constructor</h2>
     <?js } ?>
 
     <h4 class="name <?js= data.deprecated ? "deprecated": "" ?>" id="<?js= id ?>"><?js= (kind === 'class' ? 'new ' : '') +
-    (self.conf.smallSourceLink !== false ? self.linkto(meta.shortpath, name, null, 'line' + meta.lineno) : name)
+    self.linkto(meta.shortpath, name, null, 'line' + meta.lineno)
     + (data.signature || '') ?>
 
-    <?js if (data.attribsRaw) { 
-      data.attribsRaw.forEach(function(attr){  
+    <?js if (data.attribsRaw) {
+      data.attribsRaw.forEach(function(attr){
     ?>
-      <span class="member-attr <?js= attr ?>"><?js= attr ?></span>
+        <?js if (attr !== 'inner') {  ?>
+            <span class="member-attr <?js= attr ?>"><?js= attr ?></span>
+        <?js } ?>
     <?js }) } ?>
 
     </h4>
@@ -53,8 +60,6 @@ var self = this;
     <h5>Arguments:</h5>
     <?js= this.partial('params.tmpl', params) ?>
 <?js } ?>
-
-<?js= this.partial('details.tmpl', data) ?>
 
 <?js if (data.kind !== 'module' && data.requires && data.requires.length) { ?>
 <h5>Requires:</h5>
@@ -96,7 +101,7 @@ var self = this;
     <?js });
 } } ?>
 
-<?js if (data.returns && returns.length && (self.conf.smallSourceLink === false) ) { ?>
+<?js if (data.returns && returns.length) { ?>
 <h5>Returns:</h5>
 <?js if (returns.length > 1) { ?><ul><?js
     returns.forEach(function(r) { ?>
@@ -108,7 +113,12 @@ var self = this;
     <?js });
 } } ?>
 
+<?js= this.partial('details.tmpl', data) ?>
+
 <?js if (data.examples && examples.length) { ?>
     <h5>Example<?js= examples.length > 1? 's':'' ?></h5>
     <?js= this.partial('examples.tmpl', examples) ?>
 <?js } ?>
+
+
+</div>
