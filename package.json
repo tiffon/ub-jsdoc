@@ -11,7 +11,10 @@
     "type": "git",
     "url": "git+https://github.com/tiffon/ub-jsdoc.git"
   },
-  "author": "Pavl Mash <pavel.mash@gmail.com>",
+  "author": [
+    "Pavl Mash <pavel.mash@gmail.com>",
+    "tiffon <joe.farro@gmail.com>"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/tiffon/ub-jsdoc/issues"
