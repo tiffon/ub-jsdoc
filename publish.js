@@ -355,11 +355,42 @@ function addToSearch(member, group){
     }
 }
 
+var prepName = (function() {
+
+  var quotes = { '"': true, "'": true };
+  var moduleSpan = ['<span class="nav--module-name-part">', '</span>'];
+
+  function prepName(s) {
+    var name = s;
+    var result;
+    if (quotes[s[0]] && quotes[s[s.length - 1]]) {
+      name = s.slice(1, -1);
+    }
+    var n = name.lastIndexOf('/');
+    if (n > -1) {
+      result = {
+        module: moduleSpan.join(name.slice(0, n + 1)),
+        name: name.slice(n + 1)
+      };
+      // name = moduleSpan.join(name.slice(0, n + 1)) + name.slice(n + 1);
+    } else {
+      result = {
+        module: '',
+        name: name
+      };
+    }
+    // return name;
+    return result;
+  }
+  return prepName;
+})();
+
 function buildMemberNav(items, itemHeading, itemsSeen, linktoFn) {
     var nav = '';
     var itemsNav = '';
 
     function addContainer(item){
+        item.nameParts = prepName(item.name);
         var containerHTML = '<li>', childCount, id;
         if ( !hasOwnProp.call(item, 'longname') ) {
             containerHTML +=  linktoFn('', item.name);
@@ -374,9 +405,16 @@ function buildMemberNav(items, itemHeading, itemsSeen, linktoFn) {
                 childCount = methods.length + classes.length + members.length;
 
                 if (childCount) {
-                    containerHTML += '<input type="checkbox" id="' + id + '"/>';
+                    containerHTML += '<input type="checkbox" id="' + id + '" checked />';
                 }
-                containerHTML += '<label for="' + id + '">' + linktoFn(item.longname, item.name.replace(/^module:/, ''), 'member-kind-' + item.kind + (item.deprecated ? ' deprecated' : '')) + '</label>';
+
+                console.log(item.nameParts);
+                // containerHTML += '<label for="' + id + '">' + member.nameParts.module + linktoFn(item.longname, member.nameParts.name, 'member-kind-' + item.kind + (item.deprecated ? ' deprecated' : '')) + '</label>';
+
+
+
+                containerHTML += '<label for="' + id + '">' + item.nameParts.module + linktoFn(item.longname, item.nameParts.name.replace(/^module:/, ''), 'member-kind-' + item.kind + (item.deprecated ? ' deprecated' : '')) + '</label>';
+
                 addToSearch(item, itemHeading);
                 if (childCount) {
                     containerHTML += '<section>';
@@ -391,8 +429,9 @@ function buildMemberNav(items, itemHeading, itemsSeen, linktoFn) {
                 id = getNavID();
                 childCount = item.children.length;
                 if (childCount) {
-                    containerHTML += '<input type="checkbox" id="' + id + '"/>';
+                    containerHTML += '<input type="checkbox" id="' + id + '" checked />';
                 }
+
                 containerHTML += '<label for="' + id + '">' + linktoFn(item.longname, item.name.replace(/^module:/, ''), 'member-kind-' + item.kind + (item.deprecated ? ' deprecated' : '')) + '</label>';
                 addToSearch(item, itemHeading);
                 if (childCount) {
@@ -423,6 +462,8 @@ function buildMemberNav(items, itemHeading, itemsSeen, linktoFn) {
 
     if (items && items.length) {
         items.forEach(function(item) {
+            // item.name = prepName(item.name);
+            // item.nameParts = prepName(item.name);
             itemsNav += addContainer(item);
         });
 

@@ -29,18 +29,22 @@ nav li section {
 nav label{
     padding: 3px 3px 3px 16px;
 }
-nav input[type=checkbox] { display: none; }
+
+nav input[type=checkbox] {
+  display: none;
+}
+
 nav input[type=checkbox] ~ section {
-    max-height: 0;
-    max-width: 0;
-    opacity: 0;
+    max-height: 1px;
+    /*max-width: 0;*/
+    opacity: 0.5;
     overflow: hidden;
     white-space:nowrap;
     transition:all 0.2s ease;
 }
 nav input[type=checkbox]:checked ~ section {
     max-height: 100%;
-    max-width: 100%;
+    /*max-width: 100%;*/
     opacity: 1;
 }
 nav input[type=checkbox] + label:before{
@@ -610,6 +614,7 @@ code {
 }
 
 body {
+  line-height: 1.8;
   max-width: none;
 }
 
@@ -623,10 +628,14 @@ nav {
 
 #main {
   float: none;
-  overflow: hidden;
+  overflow: scroll;
   padding: 0 1em;
   width: auto;
   margin-left: 380px;
+}
+
+#main p {
+  max-width: 750px;
 }
 
 #search-result {
@@ -638,6 +647,60 @@ nav {
 .search-char-match {
   color: #f6f;
 }
+
+.forScrollToTop {
+  height: auto;
+}
+
+.forScrollToTop:last-child {
+  height: 60vh;
+}
+
+.nav--module-name-part {
+  color: #777;
+  padding-right: 0.5em;
+}
+
+.member-kind-module:before {
+  content: none;
+  display: none;
+}
+
+nav ul ul {
+  margin-bottom: 0;
+}
+
+nav > ul > li {
+  clear: both;
+  float: left;
+  margin-top: 2em;
+}
+
+nav ul a {
+  font-size: 0.9em;
+}
+
+nav > * {
+  clear: both;
+}
+
+nav input[type=checkbox] ~ section {
+  max-width: auto;
+}
+
+.member-kind-module {
+  font-size: 1em;
+}
+
+#search-input {
+  border: 1px solid #ccc;
+  padding: 0.6em;
+  width: 90%;
+}
+
+
+
+
 
 @media only screen and (min-width: 320px) and (max-width: 1200px) {
   body {

@@ -1,5 +1,5 @@
 (function(){
-	var idDiv = document.getElementById('main');
+  var idDiv = document.getElementById('main');
 
     function getPartial(originalHref){
         var partialHref = 'partials/' + originalHref;
@@ -35,40 +35,40 @@
     }
 
     function isPartial(href){
-		var res = Boolean(href);
-		if (res) res = (href.indexOf('.js.html') === -1)
-			&& (href.indexOf('http://') === -1)
-			&& (href.indexOf('https://') === -1)
-			&& (href.charAt(0) !== '/');
-		return res;
-	}
-	var needUpdateURL = false;
+    var res = Boolean(href);
+    if (res) res = (href.indexOf('.js.html') === -1)
+      && (href.indexOf('http://') === -1)
+      && (href.indexOf('https://') === -1)
+      && (href.charAt(0) !== '/');
+    return res;
+  }
+  var needUpdateURL = false;
 
-	if (window && window.fetch && window.history && history.pushState) {
-		document.body.onclick = function( e ) {
-			var evt = e || window.event,
-				target = evt.target || evt.srcElement,
-				originalHref;
+  if (window && window.fetch && window.history && history.pushState) {
+    document.body.onclick = function( e ) {
+      var evt = e || window.event,
+        target = evt.target || evt.srcElement,
+        originalHref;
 
-			// If the element clicked is an anchor
-			if ( target.nodeName === 'A' ) {
-				originalHref = target.getAttribute('href');
-				if (isPartial(originalHref)){
-					needUpdateURL = true;
-					getPartial(originalHref);
-					e.preventDefault();
-				}
+      // If the element clicked is an anchor
+      if ( target.nodeName === 'A' ) {
+        originalHref = target.getAttribute('href');
+        if (isPartial(originalHref)){
+          needUpdateURL = true;
+          getPartial(originalHref);
+          e.preventDefault();
+        }
                 document.getElementById('search-trigger').checked = false;
                 document.getElementById('nav-trigger').checked = false;
-			}
-		};
-		window.onpopstate = function(event) {
-			needUpdateURL = false;
-			if (event.state && event.state.href){
-				getPartial(event.state.href);
-			}
-		}
-	}
+      }
+    };
+    window.onpopstate = function(event) {
+      needUpdateURL = false;
+      if (event.state && event.state.href){
+        getPartial(event.state.href);
+      }
+    }
+  }
 
 if (!window.exports) window.exports = {};
     /**
@@ -100,40 +100,40 @@ window.exports["gotoLine"] = function() {
 };
 
 var buildMatchedString = (function() {
-	var matchedStart = '<span class="search-char-match">';
-	var matchedEnd = '</span>';
-	function buildMatchedString(searchText, text) {
-		var needle = searchText.toLowerCase();
-		var haystack = text.toLowerCase();
-		var si = 0;
-		var ti = 0;
-		var smax = searchText.length;
-		var tmax = text.length;
-		var isMatching = false;
-		var result = [];
-		while (si < smax && ti < tmax) {
-			if (needle[si] === haystack[ti]) {
-				if (!isMatching) {
-					result.push(matchedStart);
-					isMatching = true;
-				}
-				si++;
-			} else if (isMatching) {
-				result.push(matchedEnd);
-				isMatching = false;
-			}
-			result.push(text[ti]);
-			ti++;
-		}
-		if (isMatching) {
-			result.push(matchedEnd);
-		}
-		if (ti < tmax) {
-			result.push(text.slice(ti));
-		}
-		return result.join('');
-	}
-	return buildMatchedString;
+  var matchedStart = '<span class="search-char-match">';
+  var matchedEnd = '</span>';
+  function buildMatchedString(searchText, text) {
+    var needle = searchText.toLowerCase();
+    var haystack = text.toLowerCase();
+    var si = 0;
+    var ti = 0;
+    var smax = searchText.length;
+    var tmax = text.length;
+    var isMatching = false;
+    var result = [];
+    while (si < smax && ti < tmax) {
+      if (needle[si] === haystack[ti]) {
+        if (!isMatching) {
+          result.push(matchedStart);
+          isMatching = true;
+        }
+        si++;
+      } else if (isMatching) {
+        result.push(matchedEnd);
+        isMatching = false;
+      }
+      result.push(text[ti]);
+      ti++;
+    }
+    if (isMatching) {
+      result.push(matchedEnd);
+    }
+    if (ti < tmax) {
+      result.push(text.slice(ti));
+    }
+    return result.join('');
+  }
+  return buildMatchedString;
 })();
 
 var ftsData = null, searchInProgress = false;
@@ -196,7 +196,7 @@ function fullTextSearch(textToSearch){
                 }
                 currentNode = currentNode[memberPath[j]];
             }
-						var linkText = buildMatchedString(textToSearch, memberPath[j]);
+            var linkText = buildMatchedString(textToSearch, memberPath[j]);
             // currentNode[memberPath[j]] = '<a href="' + member.href + '" style="opacity:' +  Math.max(search[i].score*100, 0.3)+ '">' + memberPath[j] + '</a>';
             currentNode[memberPath[j]] = '<a href="' + member.href + '" style="opacity:' +  Math.max(search[i].score*100, 0.3)+ '">' + linkText + '</a>';
         }
