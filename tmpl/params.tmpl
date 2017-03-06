@@ -43,10 +43,11 @@
 		  paramInfo = '[' + paramInfo + ']';
 		}
 
-		paramInfo = '<code>' + paramInfo + '</code> ';
+		paramInfo = '<code>' + paramInfo;
 		if (param.type && param.type.names) {
-            		paramInfo = paramInfo + '<code>(' + self.partial('type.tmpl', param.type.names) + ')</code>';
-        	}
+      paramInfo += ' : ' + self.partial('type.tmpl', param.type.names).trim();
+  	}
+    paramInfo += '</code>';
 		if (param.description) paramInfo +=  '&nbsp;&nbsp' + param.description;
 
 		param.paramInfo = paramInfo;

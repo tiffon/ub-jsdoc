@@ -639,10 +639,24 @@ nav {
 }
 
 #search-result {
-    background-color: #444;
-    margin-top: 4em;
-    max-height: 50%;
+  background-color: #444;
+  margin-left: 380px;
+  margin-top: 0;
+  max-height: 100%;
+  width: calc(100% - 380px);
 }
+
+#search-result input[type=checkbox] ~ section {
+  width: auto;
+}
+
+#search-result input[type=checkbox]:checked + label:before {
+  content: "close";
+  font-size: 1em;
+  font-weight: normal;
+  color: #aaa;
+}
+
 
 .search-char-match {
   color: #f6f;
@@ -664,6 +678,10 @@ nav {
 .member-kind-module:before {
   content: none;
   display: none;
+}
+
+nav ul {
+  line-height: 1.5;
 }
 
 nav ul ul {
@@ -696,6 +714,10 @@ nav input[type=checkbox] ~ section {
   border: 1px solid #ccc;
   padding: 0.6em;
   width: 90%;
+}
+
+h4.name {
+  font-family: consolas, monospace;
 }
 
 
